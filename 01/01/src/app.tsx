@@ -1,6 +1,13 @@
+import { useState, useEffect } from "react"
+import ColoredMessage from "./components/ColoredMessage";
+import CC from "./components/childrenComponent"
+
 const App = () => {
+  const [num, setNum] = useState<number>(0)
+
   const onClickButton = (): void => {
-    window.alert();
+    setNum((prev) => prev + 1)
+    //setNum(num + 1)
   }
 
   const pStyle = {
@@ -8,9 +15,12 @@ const App = () => {
     fontSize: "20px",
   }
 
+  useEffect(() => {
+    console.log(num)
+  }, [num])
+
   return (
     <>
-      <h1 style={{"color": "red"}}>Hello React</h1>
       <p style={pStyle}>hello react</p>
 
       <button
@@ -18,6 +28,22 @@ const App = () => {
       >
         ボタン
       </button>
+
+      <ColoredMessage
+        color="blue"
+        message="Hello World"
+      />
+
+      <ColoredMessage
+        color="pink"
+        message="Hello React"
+      />
+
+      <CC>
+        <p>This is Children Message</p>
+      </CC>
+
+      <p>{num}</p>
     </>
   )
 }
