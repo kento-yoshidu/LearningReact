@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import ColoredMessage from "./components/ColoredMessage";
-import CC from "./components/childrenComponent"
+import { ColoredMessage }from "./components/ColoredMessage";
+import { CC } from "./components/childrenComponent"
 
 const App = () => {
   const [num, setNum] = useState<number>(0)

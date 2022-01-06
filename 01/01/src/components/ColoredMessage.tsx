@@ -5,7 +5,7 @@ interface Props {
   message: string;
 }
 
-const ColoredMessage: React.VFC<Props> = ({ color, message }) => {
+export const ColoredMessage: React.VFC<Props> = ({ color, message }) => {
   const contentStyle = {
     color: color,
     fontSize: "20px",
@@ -13,5 +13,3 @@ const ColoredMessage: React.VFC<Props> = ({ color, message }) => {
 
   return <p style={contentStyle}>{message}</p>
 }
-
-export default ColoredMessage
