@@ -1,24 +1,57 @@
 import React, { useContext } from "react"
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  makeStyles
+} from "@material-ui/core"
+/* @ts-ignore */
+import dig from "object-dig"
 
-import { signInWithGoogle } from "../service/firebase"
+import { signInWithGoogle, logOut } from "../service/firebase"
 import { AuthContext } from "../provider/AuthProvider"
+
+const useStyles = makeStyles(() => ({
+  toolbar:{
+    justifyContent: "space-between"
+  },
+  button: {
+    color: "#fff",
+  }
+}))
 
 const Header = () => {
   const currentUser = useContext(AuthContext)
-  console.log(currentUser.email)
-  
+
+  const classes = useStyles()
+
   return (
-    <header>
-      <button onClick={signInWithGoogle}>
-        {/*
-        {currentUser && (
-          <p>{currentUser}でログイン中</p>
+    <AppBar position="static">
+      <Toolbar className={classes.toolbar}>
+        <Typography variant="h6">
+          TodoApp
+        </Typography>
+
+        {dig(currentUser, "currentUser", "uid") ? (
+          <Button
+            className={classes.button}
+            onClick={logOut}
+          >
+            ログアウト
+          </Button>
+        ) : (
+          <Button
+            className={classes.button}
+            onClick={signInWithGoogle}
+          >
+            ログイン
+          </Button>
         )}
-        */}
-      </button>
-    </header>
+      </Toolbar>
+
+    </AppBar>
   )
 }
 
 export default Header
-
