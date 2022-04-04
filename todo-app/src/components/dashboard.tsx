@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core"
 
 import type { Todo } from "../../@types/types"
+import { classicNameResolver } from "typescript"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,7 +23,16 @@ const useStyles = makeStyles(() => ({
     marginTop: 40
   },
   form: {
-
+    width: "100%",
+    maxWidth: 360,
+    margin: "auto",
+    marginBottom: 40,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline"
+  },
+  input: {
+    marginRight: 10
   }
 }))
 
@@ -30,6 +40,8 @@ const Dashboard = () => {
   const currentUser = useContext(AuthContext)
   const [inputName, setInputName] = useState<string>("")
   const [todos, setTodos] = useState<Todo[]>([]);
+
+  const classes = useStyles()
 
   useEffect(() => {
     fetch()
@@ -51,20 +63,24 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       {dig(currentUser, "currentUser", "uid") ? (
         <>
-          <form>
+          <form className={classes.form}>
             <TextField
               onChange={(e) => setInputName(e.currentTarget.value)}
               placeholder="Todo Name"
               value={inputName}
+              className={classes.input}
             />
 
             <Button
-              variant="text"
+              variant="contained"
               type="button"
+              color="primary"
+              size="small"
               onClick={() => post()}
+              disabled={!inputName}
             >
               追加
             </Button>
