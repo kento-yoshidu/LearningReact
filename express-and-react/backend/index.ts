@@ -8,7 +8,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/greeting', (req, res) => {
-  res.send('Greeting!')
+  res.json({ message: "Greeting" })
+})
+
+app.get('/goodbye', (req, res) => {
+  res.json({ message: "GoodBye" })
 })
 
 app.listen(port, () => {
