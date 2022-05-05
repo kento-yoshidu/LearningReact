@@ -17,7 +17,7 @@ const App: React.VFC = () => {
 
   return (
     <>
-      <h1>フロントエンド</h1>
+      <p className="text-white bg-black w-20">Hello world!</p>
       <p>{ message }</p>
       <p>{ good }</p>
     </>
