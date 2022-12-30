@@ -28,29 +28,48 @@ const generateDummyTasks = (): Task[] => {
 
 const tasks = generateDummyTasks()
 
+const filteringAssignee = (assignee: string) => {
+  if (assignee === "") return tasks
+  return tasks.filter((task) => task.assignee === assignee)
+}
+
 const Transition = () => {
   const [selectedAssignee, setSelectedAssignee] = useState("")
   const [taskList, setTaskList] = useState<Task[]>(tasks)
 
   const onClickAssignee = (assignee: string) => {
-    alert(assignee)
+    setSelectedAssignee(assignee)
+    setTaskList(filteringAssignee(assignee))
   }
 
   return (
     <div>
       <div style={{display: "flex", justifyContent: "center"}}>
-        <Avatar onClick={onClickAssignee}>
+        <Avatar
+          isSelected={selectedAssignee === member.a}
+          onClick={onClickAssignee}
+        >
           {member.a}
         </Avatar>
 
-        <Avatar onClick={onClickAssignee}>
+        <Avatar
+          isSelected={selectedAssignee === member.b}
+          onClick={onClickAssignee}
+        >
           {member.b}
         </Avatar>
 
-        <Avatar onClick={onClickAssignee}>
+        <Avatar
+          isSelected={selectedAssignee === member.c}
+          onClick={onClickAssignee}
+        >
           {member.c}
         </Avatar>
       </div>
+
+      <hr />
+
+      <button onClick={() => onClickAssignee("")}>Reset</button>
 
       {taskList.map((task) => {
         return (
