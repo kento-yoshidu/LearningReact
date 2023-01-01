@@ -1,8 +1,9 @@
-import { assert } from "console"
 import { useState } from "react"
-import Avatar from "./Avatar"
 
-type Task = {
+import Avatar from "./Avatar"
+import TaskList from "./TaskList"
+
+export type Task = {
   id: number
   title: string
   assignee: string
@@ -71,14 +72,9 @@ const Transition = () => {
 
       <button onClick={() => onClickAssignee("")}>Reset</button>
 
-      {taskList.map((task) => {
-        return (
-          <div key={task.id} style={{"background": "lavender"}}>
-            <p>{task.title}</p>
-            <p>{task.assignee}</p>
-          </div>
-        )
-      })}
+      <TaskList
+        taskList={taskList}
+      />
     </div>
   )
 }
