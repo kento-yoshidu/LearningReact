@@ -37,7 +37,7 @@ const filteringAssignee = (assignee: string) => {
 const Transition = () => {
   const [selectedAssignee, setSelectedAssignee] = useState("")
   const [taskList, setTaskList] = useState<Task[]>(tasks)
-  const [isShowList, setIsShowList] = useState(true)
+  const [isShowList, setIsShowList] = useState(false)
 
   const onClickAssignee = (assignee: string) => {
     setSelectedAssignee(assignee)
