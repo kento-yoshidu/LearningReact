@@ -1,30 +1,17 @@
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
-import { createExportDefault } from "typescript"
-
-type Album = {
-  userId: number
-  id: number
-  title: string
-}
-
-const fetchAlbums = async () => {
-  const result = await axios.get<Album[]>('https://jsonplaceholder.typicode.com/albums')
-
-  return result.data
-}
+import TodoList from "./TodoList"
+import Sidebar from "./Sidebar"
+import AlbumList from './AlbumList'
 
 const ReactQuery = () => {
-  const { data } = useQuery<Album[]>(['albums'], fetchAlbums)
-
   return (
-    <>
-      <h1>hoge</h1>
+    <div style={{ "display": "flex", "padding": "16px" }}>
+      <Sidebar />
 
-      {data?.map((album) => (
-        <p key={album.id}>{album.title}</p>
-      ))}
-    </>
+      <div style={{ flexGrow: 1 }}>
+        <AlbumList />
+        <TodoList />
+      </div>
+    </div>
   )
 }
 
