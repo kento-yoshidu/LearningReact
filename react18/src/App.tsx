@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react';
 
-import Transition from './components/Transition';
 import ReactQuery from './components/ReactQuery';
 import { ErrorBoundary } from 'react-error-boundary';
+
+import Transition from './components/Transition';
 
 function App() {
   return (
