@@ -7,8 +7,14 @@ type Album = {
   title: string
 }
 
+const sleep = (ms: number): Promise<any> => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
+
 const fetchAlbums = async () => {
-  const result = await axios.get<Album[]>('https://jsonplaceholder.typicode.com/albums')
+  const result = await axios.get<Album[]>('https://jsonplaceholder.typicode.com/albums').then(await sleep(5000))
 
   return result.data
 }
