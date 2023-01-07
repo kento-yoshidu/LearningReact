@@ -1,25 +1,52 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState, useTransition } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import TodoList from "./TodoList"
 import Sidebar from "./Sidebar"
 import AlbumList from './AlbumList'
 
+type Tabs = "todo" | "album"
+
 const ReactQuery = () => {
+  const [selectedTab, setSelectedTab] = useState<Tabs>("todo")
+  const [isPending, startTransition] = useTransition()
+
+  const buttonStyle = {
+    padding: "12px",
+    fontSize: "16px",
+    border: "none",
+    opacity: isPending ? 0.5 : 1
+  }
+
+  const albumButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: selectedTab === "album" ? 'royalblue' : "white",
+    color: selectedTab === "album" ? "white" : "black"
+  }
+
+  const todoButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: selectedTab === "todo" ? 'royalblue' : "white",
+    color: selectedTab === "todo" ? "white" : "black"
+  }
+
+  const onClickTabButton = (tab: Tabs) => {
+    startTransition(() => {
+      setSelectedTab(tab)
+    })
+  }
+
   return (
     <div style={{ "display": "flex", "padding": "16px" }}>
       <Sidebar />
 
       <div style={{ flexGrow: 1 }}>
-        <ErrorBoundary fallback={<p>リストエラーです。</p>}>
-          <Suspense fallback={<p>ローディング中です。</p>}>
-            <AlbumList />
-          </Suspense>
-        </ErrorBoundary>
+        <button style={todoButtonStyle} onClick={() => onClickTabButton("todo")}>Todo</button>
+        <button style={albumButtonStyle} onClick={() => onClickTabButton("album")}>Album</button>
 
         <ErrorBoundary fallback={<p>リストエラーです。</p>}>
           <Suspense fallback={<p>ローディング中です。</p>}>
-            <TodoList />
+            {selectedTab === 'todo' ? <TodoList /> : <AlbumList />}
           </Suspense>
         </ErrorBoundary>
       </div>
