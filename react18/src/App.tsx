@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import ReactQuery from './components/ReactQuery';
-import { ErrorBoundary } from 'react-error-boundary';
 
 import Transition from './components/Transition';
 
@@ -10,10 +10,8 @@ function App() {
     <div className="App">
       <Transition />
 
-      <hr />
-
-      <ErrorBoundary fallback={<p>エラーです。</p>}>
-        <Suspense fallback={<p>ローディング中です。</p>}>
+      <ErrorBoundary fallback={<p>全体エラーです。</p>}>
+        <Suspense fallback={<p>全体ローでイング中です。</p>}>
           <ReactQuery />
         </Suspense>
       </ErrorBoundary>
