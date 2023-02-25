@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import RenderInput from "./RenderInput"
+import FrameworkList from "./FrameworkList"
 import './App.css';
 
 function App() {
   /*追加 output関数*/
-  const output = (text) => {
+  const output = (text: string) => {
     console.log(text);
   };
+
+  const data = [{
+    id: 1, item: "React"
+  }, {
+    id: 2, item: "Rust"
+  }, {
+    id: 3, item: "AWS"
+  }]
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-
         <RenderInput
           outputConsole={output}
         />
+
+        <FrameworkList
+          frameworks={data}
+        />
+
+        <FrameworkList />
 
         <p>
           Edit <code>src/App.js</code> and save to reload.
