@@ -7,7 +7,7 @@ const MockServer = () => {
   const [error, setError] = useState("")
   
   const fetchUser =async () => {
-    axios.get('https://jsonplaceholder.typicode.com/users/100')
+    axios.get('https://jsonplaceholder.typicode.com/users/1')
       .then((res) => {
         const { username } = res.data
         setUsername(username)
@@ -23,9 +23,7 @@ const MockServer = () => {
     <>
       <button onClick={fetchUser} disabled={clicked}>{buttonText}</button>
 
-      {username && (
-        <h3>{username}</h3>
-      )}
+      {username && <h3>{username}</h3>}
 
       {error && (
         <p data-testid="error" style={{ color: "red" }}>{error}</p>
