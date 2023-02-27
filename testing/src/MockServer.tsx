@@ -5,7 +5,7 @@ const MockServer = () => {
   const [clicked, setClicked] = useState(false)
   const [username, setUsername] = useState("")
   const [error, setError] = useState("")
-  
+
   const fetchUser =async () => {
     axios.get('https://jsonplaceholder.typicode.com/users/1')
       .then((res) => {
